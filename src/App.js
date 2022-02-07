@@ -97,15 +97,30 @@ class App extends React.Component {
   };
 
   render() {
+    const {
+      listOfCards,
+    } = this.state;
     return (
       <div>
+
         <h1>Tryunfo</h1>
+
         <Form
           { ...this.state }
           onInputChange={ this.handdleChange }
           onSaveButtonClick={ this.onSaveButtonClick }
         />
+
         <Card { ...this.state } />
+
+        <div>
+          {listOfCards.map((card) => (
+            <Card
+              { ...card }
+              key={ card.cardName }
+            />))}
+        </div>
+
       </div>
     );
   }
