@@ -19,6 +19,18 @@ class App extends React.Component {
       this.setState({ [target.id]: target.value }, () => this.verifyAttr());
     }
 
+    onSaveButtonClick = () => {
+      this.setState(() => ({
+        cardName: '',
+        cardDescription: '',
+        cardAttr1: '0',
+        cardAttr2: '0',
+        cardAttr3: '0',
+        cardImage: '',
+        cardRare: 'normal',
+      }));
+    }
+
   verifyAttr = () => {
     const {
       cardName,
@@ -46,7 +58,11 @@ class App extends React.Component {
     return (
       <div>
         <h1>Tryunfo</h1>
-        <Form { ...this.state } onInputChange={ this.handdleChange } />
+        <Form
+          { ...this.state }
+          onInputChange={ this.handdleChange }
+          onSaveButtonClick={ this.onSaveButtonClick }
+        />
         <Card { ...this.state } />
       </div>
     );
