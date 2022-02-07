@@ -6,21 +6,52 @@ class App extends React.Component {
     state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: '0',
-      cardAttr2: '0',
-      cardAttr3: '0',
+      cardAttr1: '',
+      cardAttr2: '',
+      cardAttr3: '',
       cardImage: '',
       cardRare: 'normal',
-      cardTrunfo: false,
       isSaveButtonDisabled: true,
-    };
+      cardTrunfo: false,
+      hasTrunfo: false,
+      listOfCards: [],
+    }
 
     handdleChange = ({ target }) => {
       this.setState({ [target.id]: target.value }, () => this.verifyAttr());
     }
 
-    onSaveButtonClick = () => {
-      this.setState(() => ({
+    onSaveButtonClick = (event) => {
+      event.preventDefault();
+      const {
+        cardName,
+        cardDescription,
+        cardAttr1,
+        cardAttr2,
+        cardAttr3,
+        cardImage,
+        cardRare,
+        cardTrunfo,
+        listOfCards,
+        hasTrunfo,
+      } = this.state;
+      const newCard = {
+        cardName,
+        cardDescription,
+        cardAttr1,
+        cardAttr2,
+        cardAttr3,
+        cardImage,
+        cardRare,
+        cardTrunfo,
+        listOfCards,
+        hasTrunfo,
+      };
+
+      const list = listOfCards;
+      listOfCards.push(newCard);
+      this.verifyTrunfoInListOfCards();
+      this.setState({
         cardName: '',
         cardDescription: '',
         cardAttr1: '0',
@@ -28,7 +59,17 @@ class App extends React.Component {
         cardAttr3: '0',
         cardImage: '',
         cardRare: 'normal',
-      }));
+        listOfCards: list,
+        cardTrunfo: !!hasTrunfo,
+      });
+    }
+
+    verifyTrunfoInListOfCards = () => {
+      const {
+        listOfCards,
+      } = this.state;
+      this.setState({ hasTrunfo: listOfCards
+        .some(({ cardTrunfo }) => cardTrunfo) });
     }
 
   verifyAttr = () => {
@@ -45,7 +86,8 @@ class App extends React.Component {
     const sum = (+cardAttr1 + +cardAttr2 + +cardAttr3);
     const max = 90;
     const sumAttr = 210;
-    const minMax = arrNumbers.every((item) => item >= 0 && item <= max);
+    const minMax = arrNumbers
+      .every((item) => item >= 0 && item <= max);
 
     if (arrStrings.every((item) => item !== '') && minMax && sum <= sumAttr) {
       this.setState({ isSaveButtonDisabled: false });
