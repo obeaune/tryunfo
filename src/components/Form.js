@@ -48,6 +48,8 @@ class Form extends React.Component {
             id="cardAttr1"
             onChange={ onInputChange }
             type="number"
+            min="0"
+            max="90"
             data-testid="attr1-input"
           />
           <input
@@ -55,6 +57,8 @@ class Form extends React.Component {
             id="cardAttr2"
             onChange={ onInputChange }
             type="number"
+            min="0"
+            max="90"
             data-testid="attr2-input"
           />
           <input
@@ -62,6 +66,8 @@ class Form extends React.Component {
             id="cardAttr3"
             onChange={ onInputChange }
             type="number"
+            min="0"
+            max="90"
             data-testid="attr3-input"
           />
         </label>
@@ -104,7 +110,7 @@ class Form extends React.Component {
         <button
           onClick={ onSaveButtonClick }
           disabled={ isSaveButtonDisabled }
-          id="button"
+          id="isSaveButtonDisabled"
           type="submit"
           data-testid="save-button"
         >
