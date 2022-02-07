@@ -3,7 +3,7 @@ import React from 'react';
 class Form extends React.Component {
   render() {
     return (
-      <Form>
+      <div>
 
         <label htmlFor="name">
           Nome:
@@ -42,7 +42,7 @@ class Form extends React.Component {
 
         <button id="button" type="submit" data-testid="save-button">Salvar</button>
 
-      </Form>
+      </div>
     );
   }
 }
